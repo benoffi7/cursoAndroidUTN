@@ -1,4 +1,4 @@
-Curso Android UTN 2013
+Curso Android UTN
 ===============
 
 Bienvenidos al repositorio de código del curso de Android que se dicta en la UTN. 
