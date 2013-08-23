@@ -14,12 +14,14 @@ Para no perderse las novedades pulsen los botones de "Watch" y "Star" que se enc
 
 [GitHub for Windows](http://windows.github.com/)  
 [SourceTree for Windows & Mac](http://www.sourcetreeapp.com/)  
-[Git Cliente for Linux](http://www.maketecheasier.com/6-useful-graphical-git-client-for-linux/2012/01/18)  
+[Cliente Git for Linux](http://www.maketecheasier.com/6-useful-graphical-git-client-for-linux/2012/01/18)  
 
 
 <b>Tutoriales GIT</b>
 
 [Vogella](http://www.vogella.com/articles/Git/article.html)  
+
+[Roger Dudler Tutorial ](http://rogerdudler.github.io/git-guide/index.es.html)  (gracias Victor!)
 
 
 
