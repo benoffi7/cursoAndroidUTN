@@ -23,7 +23,7 @@ Para no perderse las novedades pulsen los botones de "Watch" y "Star" que se enc
 
 [Roger Dudler Tutorial](http://rogerdudler.github.io/git-guide/index.es.html)  (gracias Victor!)
 
-[Pro Git book](http://git-scm.com/book)  (gracias Victor nuevamente!)
+[Pro Git book](http://git-scm.com/book/es)  (gracias Victor nuevamente!)
 
 
 
