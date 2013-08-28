@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="17"
+        android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
     <application
@@ -14,8 +14,10 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.coffeeandcookies.cursoandroidutn.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity android:name="lay_pablo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

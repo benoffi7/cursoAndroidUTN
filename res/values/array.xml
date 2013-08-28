@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="colores">
+        <item>Blueberry</item>
+        <item>Chocolate</item>
+        <item>Dark Chocolate</item>
+        <item>Lemon</item>
+        <item>Lime</item>
+        <item>Orange</item>
+        <item>Strawberry</item>
+        <item>Raspberry</item>
+        <item>Grape</item>
+        <item>Vanilla</item>
+        <item>Butterscotch</item>
+    </string-array>
+
+</resources>
