@@ -145,7 +145,7 @@
         </ListView>
 
         <Spinner
-            android:id="@+id/Spinner01"
+            android:id="@+id/spinner_elementos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -296,13 +296,13 @@
             android:text="CheckedTextView" />
 
         <ListView
-            android:id="@+id/listView1"
+            android:id="@+id/list_casas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </ListView>
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/spinner_colores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

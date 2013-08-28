@@ -140,7 +140,7 @@
             android:text="CheckedTextView" />
 
         <Spinner
-            android:id="@+id/Spinner01"
+            android:id="@+id/spinner_elementos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -291,7 +291,7 @@
             android:text="CheckedTextView" />
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/spinner_colores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
