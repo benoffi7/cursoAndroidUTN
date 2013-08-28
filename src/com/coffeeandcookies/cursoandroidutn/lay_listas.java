@@ -10,7 +10,7 @@ import android.widget.ListView;
 import com.coffeeandcookies.cursoandroidutn.adaptadores.AdaptadorCasa;
 import com.coffeeandcookies.cursoandroidutn.objetos.Casa;
 
-public class MainActivity extends Activity 
+public class lay_listas extends Activity 
 {
     @Override
     protected void onCreate(Bundle savedInstanceState) 
@@ -26,8 +26,7 @@ public class MainActivity extends Activity
         
         Casa oCasa1 = new Casa();
         oCasa1.setDireccion("Salta 4021");
-        Casas.add(oCasa1);
-        
+        Casas.add(oCasa1);                
         AdaptadorCasa adaptadorCasa = new AdaptadorCasa(Casas, getApplicationContext());
         ListView listView = (ListView)findViewById(R.id.lista);
         listView.setAdapter(adaptadorCasa);
