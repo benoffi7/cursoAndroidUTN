@@ -5,5 +5,10 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="legend_nombre">Valor</string>
+    <string name="text_moneda_origen">Moneda origen:</string>
+    <string name="text_valor">Valor:</string>
+    <string name="text_moneda_destino">Monedas Destino</string>
+    <string name="text_hint_edit">Ingrese un valor (OPCIONAL)</string>
+    <string name="button_convertir">Convertir</string>
 
 </resources>

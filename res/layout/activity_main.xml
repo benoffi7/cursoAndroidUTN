@@ -36,7 +36,7 @@
         android:textColor="@color/blanco" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/edit_valor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1"

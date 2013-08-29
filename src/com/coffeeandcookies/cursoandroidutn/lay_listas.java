@@ -25,14 +25,22 @@ public class lay_listas extends Activity
         
         //COMBOS
         
+        //Datos: pueden ser una array de String o un array cargado en los recursos.
+        
         final String[] 	elementos = new String[]{"Elem1","Elem2","Elem3","Elem4","Elem5"};
         final String[]  colores = getResources().getStringArray(R.array.colores);
-
+        
+        //Instanciamos el Adaptador
+        
         ArrayAdapter<String> adaptador_elementos = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,elementos);
         ArrayAdapter<String> adaptador_colores =  new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, colores);
         
+       //Configuracion adicional para los spinner - Se define el tipo de lista
+        
         adaptador_elementos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adaptador_colores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        
+        //Obtenemos la referencia del componente XML en Java
 
         Spinner comboElementos = (Spinner)findViewById(R.id.spinner_elementos);
         Spinner comboColores = (Spinner)findViewById(R.id.spinner_colores);
