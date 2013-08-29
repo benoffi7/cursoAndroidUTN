@@ -14,5 +14,18 @@
         <item>Vanilla</item>
         <item>Butterscotch</item>
     </string-array>
+    
+    
+     <string-array name="monedas">
+        <item>Dolares</item>
+        <item>Dolares Blue</item>
+        <item>Euros</item>
+        <item>Yenes</item>
+        <item>Libras</item>
+        <item>Pesos</item>
+        
+    </string-array>
+    
+     
 
 </resources>
