@@ -31,6 +31,7 @@ public class lay_conversor extends Activity
 	private CheckBox check_06;
 	private Button button_convertir;
 	private ListView list_conversiones_realizadas;
+	
 	private String[] monedas;
 	int monedaSeleccionada = 0;
 	//Double[] cotizaciones = {1.00,8.00,0.73,97.991054,8.75752,5.64}; base dolar
