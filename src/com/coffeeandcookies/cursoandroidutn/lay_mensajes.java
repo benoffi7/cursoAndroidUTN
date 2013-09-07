@@ -25,9 +25,10 @@ public class lay_mensajes extends Activity
 	private void mostrarMensaje()
 	{
 		AlertDialog.Builder dialogo1 = new AlertDialog.Builder(lay_mensajes.this);  
-        dialogo1.setTitle("Alert Dialog");  
+        dialogo1.setTitle(getResources().getString(R.string.app_name));  
+        dialogo1.setIcon(getResources().getDrawable(R.drawable.ic_launcher));
         dialogo1.setMessage("Hola, mucho gusto, soy un Alert Dialog. Presione cualquiera de mis tres opciones. Gracias y que tenga buen día");            
-        dialogo1.setCancelable(false);  
+          
         dialogo1.setPositiveButton("Tostada al medio", new DialogInterface.OnClickListener() 
         {  
             public void onClick(DialogInterface dialogo1, int id)

@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
        
-        <activity android:name=".lay_mensajes" >
+        <activity android:name=".lay_conversor" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
