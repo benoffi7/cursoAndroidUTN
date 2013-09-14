@@ -15,7 +15,8 @@ public class lay_login_correcto extends Activity
 		Log.v(TAG, "onCreate - lay_login_correcto");
 		setContentView(R.layout.lay_login_correcto);
 		TextView textView_user = (TextView)findViewById(R.id.textView_user);
-		String usuario = getIntent().getExtras().getString("user");
+		String usuario = getIntent().getExtras().getString(Configuracion.user);
+	
 		textView_user.setText(usuario);
 		super.onCreate(savedInstanceState);
 	}
@@ -24,6 +25,7 @@ public class lay_login_correcto extends Activity
 	public void onBackPressed() 
 	{
 		Log.v(TAG, "onBackPressed - lay_login_correcto");
+		finish();
 		super.onBackPressed();
 	}
 	
@@ -74,6 +76,7 @@ public class lay_login_correcto extends Activity
 	{
 		Log.v(TAG, "onSaveInstanceState - lay_login_correcto");
 		super.onSaveInstanceState(outState);
+		outState.putBoolean("valor", true);
 	}
 	
 	@Override
@@ -81,6 +84,7 @@ public class lay_login_correcto extends Activity
 	{
 		Log.v(TAG, "onRestoreInstanceState - lay_login_correcto");
 		super.onRestoreInstanceState(savedInstanceState);
+		savedInstanceState.getBoolean("valor");
 	}
 
 

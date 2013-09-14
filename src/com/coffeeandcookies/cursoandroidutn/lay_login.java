@@ -98,7 +98,7 @@ public class lay_login extends Activity
 				{
 					Toast.makeText(getApplicationContext(), "Validacion OK", Toast.LENGTH_LONG).show();
 					Intent intento = new Intent(lay_login.this,lay_login_correcto.class);
-					intento.putExtra("user", edit_user.getText().toString());
+					intento.putExtra(Configuracion.user, edit_user.getText().toString());
 					startActivity(intento);
 				}
 				else
