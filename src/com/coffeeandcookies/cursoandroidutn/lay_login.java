@@ -17,13 +17,13 @@ public class lay_login extends Activity
 	private Button button_login;
 	
 	String TAG = "Ciclodevida";
-	String password = "Velez";
+	String password = "velez";
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-		Log.d(TAG, "onCreate");
+		Log.d(TAG, "onCreate - lay_login");
 		setContentView(R.layout.lay_login);
 		levantarXML();
 		asignarEventos();
