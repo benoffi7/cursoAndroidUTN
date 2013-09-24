@@ -16,5 +16,9 @@
     <string name="hint_pass">Ingrese su password</string>
     <string name="legend_password">Password</string>
     <string name="button_ingresar">Ingresar</string>
+    <string name="button_guardar">Guardar</string>
+    <string name="button_borrar">Borrar</string>
+    <string name="legend_edad">Edad</string>
+    <string name="legend_mail">Mail</string>
 
 </resources>

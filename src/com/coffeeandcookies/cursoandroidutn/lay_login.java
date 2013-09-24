@@ -2,6 +2,7 @@ package com.coffeeandcookies.cursoandroidutn;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ public class lay_login extends Activity
 	
 	String TAG = "Ciclodevida";
 	String password = "velez";
+	private SharedPreferences mSharedPreferences;
 	
 
 	@Override
@@ -25,67 +27,29 @@ public class lay_login extends Activity
 	{
 		Log.d(TAG, "onCreate - lay_login");
 		setContentView(R.layout.lay_login);
+		mSharedPreferences = getApplicationContext().getSharedPreferences(Configuracion.misprefs, 0);
 		levantarXML();
 		asignarEventos();
+		levantarUser();
 		super.onCreate(savedInstanceState);
 	}
 	
-	@Override
-	protected void onResume() 
+	private void levantarUser()
 	{
-		Log.d(TAG, "onResume - lay_login");
-		super.onResume();
+		String nombreRecuperado = mSharedPreferences.getString(Configuracion.user, "");
+		String passRecuperado = mSharedPreferences.getString(Configuracion.pass, "");
+		edit_user.setText(nombreRecuperado);
+		edit_pass.setText(passRecuperado);
 	}
 	
-	@Override
-	protected void onDestroy() 
+	private void guardarUser()
 	{
-		Log.d(TAG, "onDestroy - lay_login");
-		super.onDestroy();
+		SharedPreferences.Editor editor = mSharedPreferences.edit();
+		editor.putString(Configuracion.user, edit_user.getText().toString());
+		editor.putString(Configuracion.pass, edit_user.getText().toString());
+		editor.commit();
 	}
 	
-	@Override
-	protected void onPause() 
-	{
-		Log.d(TAG, "onPause - lay_login");
-		super.onPause();
-	}
-	
-	@Override
-	protected void onStart() 
-	{
-		Log.d(TAG, "onStart - lay_login");
-		super.onStart();
-	}
-	
-	@Override
-	protected void onRestart() 
-	{
-		Log.d(TAG, "onRestart - lay_login");
-		super.onRestart();
-	}
-	
-	@Override
-	protected void onStop() 
-	{
-		Log.d(TAG, "onStop - lay_login");
-		super.onStop();
-	}
-	
-	@Override
-	protected void onSaveInstanceState(Bundle outState)
-	{
-		Log.d(TAG, "onSaveInstanceState - lay_login");
-		super.onSaveInstanceState(outState);
-	}
-	
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) 
-	{
-		Log.d(TAG, "onRestoreInstanceState - lay_login");
-		super.onRestoreInstanceState(savedInstanceState);
-	}
-
 	private void asignarEventos() 
 	{
 		button_login.setOnClickListener(new OnClickListener() 
@@ -96,6 +60,7 @@ public class lay_login extends Activity
 				String validacion = validarDatos();
 				if (validacion.length()==0)
 				{
+					guardarUser();
 					Toast.makeText(getApplicationContext(), "Validacion OK", Toast.LENGTH_LONG).show();
 					Intent intento = new Intent(lay_login.this,lay_login_correcto.class);
 					intento.putExtra(Configuracion.user, edit_user.getText().toString());
@@ -131,5 +96,62 @@ public class lay_login extends Activity
 		edit_user = (EditText)findViewById(R.id.edit_user);
 		edit_pass = (EditText)findViewById(R.id.edit_pass);
 		button_login = (Button)findViewById(R.id.button_login);
+	}
+	
+	@Override
+	protected void onPause() 
+	{
+		Log.d(TAG, "onPause - lay_login");
+		guardarUser();
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() 
+	{
+		Log.d(TAG, "onResume - lay_login");
+		super.onResume();
+	}
+	
+	@Override
+	protected void onDestroy() 
+	{
+		Log.d(TAG, "onDestroy - lay_login");
+		super.onDestroy();
+	}
+	
+	@Override
+	protected void onStart() 
+	{
+		Log.d(TAG, "onStart - lay_login");
+		super.onStart();
+	}
+	
+	@Override
+	protected void onRestart() 
+	{
+		Log.d(TAG, "onRestart - lay_login");
+		super.onRestart();
+	}
+	
+	@Override
+	protected void onStop() 
+	{
+		Log.d(TAG, "onStop - lay_login");
+		super.onStop();
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState)
+	{
+		Log.d(TAG, "onSaveInstanceState - lay_login");
+		super.onSaveInstanceState(outState);
+	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) 
+	{
+		Log.d(TAG, "onRestoreInstanceState - lay_login");
+		super.onRestoreInstanceState(savedInstanceState);
 	}
 }

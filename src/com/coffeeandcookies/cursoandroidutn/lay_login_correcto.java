@@ -14,11 +14,9 @@ public class lay_login_correcto extends Activity
 	{
 		Log.v(TAG, "onCreate - lay_login_correcto");
 		setContentView(R.layout.lay_login_correcto);
-		TextView textView_user = (TextView)findViewById(R.id.textView_user);
 		String usuario = getIntent().getExtras().getString(Configuracion.user);
-	
-		textView_user.setText(usuario);
 		super.onCreate(savedInstanceState);
+		//levantarXML asignarXML botones validaciones
 	}
 	
 	@Override

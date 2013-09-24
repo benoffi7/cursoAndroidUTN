@@ -5,13 +5,67 @@
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin" >
 
-    <TextView
-        android:id="@+id/textView_user"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edit_user_ok"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/legend_user"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:ems="10"
+        android:hint="@string/legend_user" >
 
+        <requestFocus />
+    </EditText>
 
+    <EditText
+        android:id="@+id/edit_pass_uno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/legend_password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/edit_pass_dos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/legend_password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/edit_edad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/legend_edad"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/edit_mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/legend_mail"
+        android:inputType="textEmailAddress" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+
+        <Button
+            android:id="@+id/button_guardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/button_guardar" />
+
+        <Button
+            android:id="@+id/button_borrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/button_borrar" />
+
+    </LinearLayout>
 
 </LinearLayout>
