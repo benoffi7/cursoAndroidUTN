@@ -18,9 +18,9 @@ public class lay_login extends Activity
 	private Button button_login;
 	
 	String TAG = "Ciclodevida";
-	String password = "velez";
-	private SharedPreferences mSharedPreferences;
-	
+	//No la usamos más
+	//String password = "velez";
+	private SharedPreferences mSharedPreferences;	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -37,16 +37,15 @@ public class lay_login extends Activity
 	private void levantarUser()
 	{
 		String nombreRecuperado = mSharedPreferences.getString(Configuracion.user, "");
-		String passRecuperado = mSharedPreferences.getString(Configuracion.pass, "");
 		edit_user.setText(nombreRecuperado);
-		edit_pass.setText(passRecuperado);
 	}
 	
 	private void guardarUser()
 	{
 		SharedPreferences.Editor editor = mSharedPreferences.edit();
 		editor.putString(Configuracion.user, edit_user.getText().toString());
-		editor.putString(Configuracion.pass, edit_user.getText().toString());
+		//el password lo tengo que guardar porque si es un usuario nuevo tengo que registrar ese password
+		editor.putString(Configuracion.pass, edit_pass.getText().toString());
 		editor.commit();
 	}
 	
@@ -63,7 +62,8 @@ public class lay_login extends Activity
 					guardarUser();
 					Toast.makeText(getApplicationContext(), "Validacion OK", Toast.LENGTH_LONG).show();
 					Intent intento = new Intent(lay_login.this,lay_login_correcto.class);
-					intento.putExtra(Configuracion.user, edit_user.getText().toString());
+					//Ya no tiene sentido porque el nombre lo estoy guardando en las prefs
+//					intento.putExtra(Configuracion.user, edit_user.getText().toString());
 					startActivity(intento);
 				}
 				else
@@ -84,10 +84,18 @@ public class lay_login extends Activity
 		{
 			return "User vacio";
 		}
-		if (!edit_pass.getText().toString().equals(password))
+		//tenemos que revisar varias cosas, si el password recuperado es vacio, se trata de un nuevo usuario
+		//por lo cual no podemos validar contra algo. 
+		
+		//si tenemos password recuperado entonces si lo comparamos con lo ingresado por el usuario
+		String pass = mSharedPreferences.getString(Configuracion.pass, "");
+		if (pass.length()>0)
 		{
-			return "Contraseña incorrecta";
-		}
+			if (!edit_pass.getText().toString().equals(pass))
+			{
+				return "Contraseña incorrecta";
+			}
+		}		
 		return "";		
 	}
 
