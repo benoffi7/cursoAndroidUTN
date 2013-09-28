@@ -27,17 +27,25 @@ public class lay_login extends Activity
 	{
 		Log.d(TAG, "onCreate - lay_login");
 		setContentView(R.layout.lay_login);
-		mSharedPreferences = getApplicationContext().getSharedPreferences(Configuracion.misprefs, 0);
-		levantarXML();
+		levantarXML();		
 		asignarEventos();
-		levantarUser();
 		super.onCreate(savedInstanceState);
 	}
 	
+	@Override
+	protected void onResume() 
+	{
+		Log.d(TAG, "onResume - lay_login");
+		mSharedPreferences = getApplicationContext().getSharedPreferences(Configuracion.misprefs, 0);
+		levantarUser();
+		super.onResume();
+	}
+		
 	private void levantarUser()
 	{
 		String nombreRecuperado = mSharedPreferences.getString(Configuracion.user, "");
 		edit_user.setText(nombreRecuperado);
+		edit_pass.setText("");
 	}
 	
 	private void guardarUser()
@@ -114,12 +122,7 @@ public class lay_login extends Activity
 		super.onPause();
 	}
 
-	@Override
-	protected void onResume() 
-	{
-		Log.d(TAG, "onResume - lay_login");
-		super.onResume();
-	}
+	
 	
 	@Override
 	protected void onDestroy() 
