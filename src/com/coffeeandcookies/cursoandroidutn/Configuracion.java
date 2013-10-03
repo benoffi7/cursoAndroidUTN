@@ -7,4 +7,6 @@ public class Configuracion
 	public static final String pass = "pass";
 	public static String edad = "edad";
 	public static String mail = "mail";
+	public static String dbName = "UsuariosBD";
+	public static int dbVersion = 1;
 }
