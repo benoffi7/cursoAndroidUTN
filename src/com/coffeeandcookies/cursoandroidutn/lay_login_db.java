@@ -30,6 +30,14 @@ public class lay_login_db extends Activity
 		super.onCreate(savedInstanceState);
 	}
 	
+	@Override
+	protected void onResume() 
+	{
+		edit_user.setText("");
+		edit_pass.setText("");
+		super.onResume();
+	}
+	
 	
 	private void guardarUser()
 	{
@@ -47,31 +55,53 @@ public class lay_login_db extends Activity
 			@Override
 			public void onClick(View v) 
 			{
-				String validacion = validarDatos();
-				if (validacion.length()==0)
+				switch (validarDatos()) 
 				{
-					guardarUser();
-					Toast.makeText(getApplicationContext(), "Validacion OK", Toast.LENGTH_LONG).show();
-					Intent intento = new Intent(lay_login_db.this,lay_login_correcto.class);
-					startActivity(intento);
-				}
-				else
-				{
-					Toast.makeText(getApplicationContext(), validacion, Toast.LENGTH_LONG).show();
+					case -3:
+						Toast.makeText(getApplicationContext(), "Complete los datos requeridos", Toast.LENGTH_LONG).show();
+						break;
+					case -2:
+						Toast.makeText(getApplicationContext(), "Usuario existe pero contraseña incorrecta", Toast.LENGTH_LONG).show();
+						break;
+					case -1:
+						Toast.makeText(getApplicationContext(), "Usuario no existe - Se guardara en la base", Toast.LENGTH_LONG).show();
+						guardarUser();
+						Toast.makeText(getApplicationContext(), "Validacion OK", Toast.LENGTH_LONG).show();
+						Intent intento = new Intent(lay_login_db.this,lay_login_correcto_db.class);
+						intento.putExtra("usuario", edit_user.getText().toString());
+						intento.putExtra("pass", edit_pass.getText().toString());
+						startActivity(intento);
+						break;
+					case 0:
+						Toast.makeText(getApplicationContext(), "Validacion OK", Toast.LENGTH_LONG).show();
+						Intent intento1 = new Intent(lay_login_db.this,lay_login_correcto_db.class);
+						intento1.putExtra("usuario", edit_user.getText().toString());
+						intento1.putExtra("pass", edit_pass.getText().toString());
+						startActivity(intento1);
+						break;
+					default:
+						break;
 				}
 			}
 		});
 	}
 	
-	private String validarDatos()
+	/**
+	 * 
+	 * @return 	0 si el usuario existe y coincide pass <br> 
+			   -1 si el usuario no existe <br>
+			   -2 si el usuario existe pero no coincide pass <br> 
+			   -3 campos vacios <br>
+	 */
+	private int validarDatos()
 	{
 		if (edit_pass.getText().toString().length()==0)
 		{
-			return "Pass vacio";
+			return -3;
 		}
 		if (edit_user.getText().toString().length()==0)
 		{
-			return "User vacio";
+			return -3;
 		}
 		
 		Usuario oUsuario = new Usuario();
@@ -80,15 +110,14 @@ public class lay_login_db extends Activity
 		
 		//comentarios
 		//modularizacion
+		
+		//bundle y flags
+		//como instanciar una dao
+		//polo tecnologico y streetview
 				
 		DAO_Usuarios miDAO = new DAO_Usuarios(getApplicationContext(), Configuracion.dbName, null, Configuracion.dbVersion);
 		
-		if (miDAO.validarUser(oUsuario) == -2)
-		{
-			return  "Nombre/Password no coincide";
-		}	
-		
-		return "";
+		return miDAO.validarUser(oUsuario);
 		
 		//http://devopsreactions.tumblr.com/page/17
 	}

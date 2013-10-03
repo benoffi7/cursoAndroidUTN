@@ -34,7 +34,7 @@
         android:hint="@string/hint_pass"
         android:inputType="textPassword" >
 
-        <requestFocus />
+     
     </EditText>
 
     <Button
