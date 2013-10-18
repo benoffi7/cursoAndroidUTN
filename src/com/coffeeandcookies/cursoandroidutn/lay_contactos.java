@@ -15,11 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//http://mobile.tutsplus.com/tutorials/android/android-essentials-using-the-contact-picker/
-/*
- * 
- */
-
 public class lay_contactos extends Activity 
 {
 	private static final int CONTACT_PICKER_RESULT = 0;
