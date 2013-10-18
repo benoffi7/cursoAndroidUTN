@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -46,7 +45,7 @@ public class lay_conversor extends Activity
 		setupChecks();
 		setupCombo();
 		setupEventos();
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);		
 	}
 	
 	private void setupEventos() 
