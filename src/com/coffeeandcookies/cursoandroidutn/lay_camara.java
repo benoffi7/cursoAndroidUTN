@@ -1,12 +1,14 @@
 package com.coffeeandcookies.cursoandroidutn;
 
-import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,7 +16,8 @@ import android.widget.ImageView;
 
 public class lay_camara extends Activity
 {
-	protected static final int REQUEST_CODE = 0;
+	protected static final int CAMERA_REQUEST = 0;
+	protected static final int PICKER_GALLERY = 1;
 	private ImageView imageView_result;
 	private Button btn_camara;
 	private Button btn_galeria;
@@ -35,11 +38,9 @@ public class lay_camara extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				Intent intent = new Intent();
-				intent.setType("image/*");
-				intent.setAction(Intent.ACTION_GET_CONTENT);
-				intent.addCategory(Intent.CATEGORY_OPENABLE);
-				startActivityForResult(intent, REQUEST_CODE);
+				 Intent action = new Intent("android.media.action.IMAGE_CAPTURE");
+                 action.putExtra(MediaStore.EXTRA_OUTPUT,MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString());
+                 startActivityForResult(action, CAMERA_REQUEST);
 
 			}
 		});
@@ -49,7 +50,9 @@ public class lay_camara extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				// TODO Auto-generated method stub
+				Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+    			photoPickerIntent.setType("image/*");
+    			startActivityForResult(photoPickerIntent, PICKER_GALLERY);
 
 			}
 		});
@@ -62,41 +65,65 @@ public class lay_camara extends Activity
 		btn_galeria = (Button) findViewById(R.id.btn_galeria);
 	}
 
-	@SuppressWarnings("unused")
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
-		InputStream stream = null;
-		Bitmap bitmap = null;
-	    if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
-	    {
-		    try 
-		    {
-		        // recyle unused bitmaps
-		        if (bitmap != null) 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
+	{  
+		try
+		{
+			if ((requestCode == CAMERA_REQUEST) && (resultCode== RESULT_OK))
+	        {          	
+	        	try
 		        {
-		          bitmap.recycle();
+  		        	Bitmap photo = (Bitmap) data.getExtras().get("data");
+           	        System.gc();
+		        	ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
+			        photo.compress(Bitmap.CompressFormat.JPEG, 70, baos); //bm is the bitmap object   
+			        imageView_result.setImageBitmap(photo);
+		            System.gc();
+			       
+			        baos.close();
+			        baos=null;
 		        }
-		        stream = getContentResolver().openInputStream(data.getData());
-		        bitmap = BitmapFactory.decodeStream(stream);	
-		        imageView_result.setImageBitmap(bitmap);
-		    } 
-		    catch (Exception e) 
-		    {
-		        e.printStackTrace();
-		        if (stream != null)
+	        	catch (IllegalArgumentException e)
+	        	{
+	        		e.printStackTrace();
+	        	}
+	        	catch (Error e)
 		        {
-			        try 
-			        {
-			            stream.close();
-			        } 
-			        catch (Exception ea) 
-			        {
-			            ea.printStackTrace();
-			        }
+	        		e.printStackTrace();
 		        }
-		    }
-	    } 
-		super.onActivityResult(requestCode, resultCode, data);
-	}
+		        catch (Exception ex)
+		        {
+	        	   ex.printStackTrace();
+		        }	            
+	        }
+	        if ((requestCode == PICKER_GALLERY) && (resultCode== RESULT_OK))
+	        {      	
+	            try
+		        {
+	            	Uri chosenImageUri = data.getData();
+		            Bitmap photoBitMap = Media.getBitmap(this.getContentResolver(), chosenImageUri);
+	       		 	System.gc();		  			            
+			        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			        photoBitMap.compress(Bitmap.CompressFormat.JPEG, 70, baos);	          
+			        imageView_result.setImageBitmap(photoBitMap);			       
+			        System.gc();	
+			        baos.close();
+			        baos=null;
+		           
+		        }
+	            catch (Error e)
+		        {
+	        	   e.printStackTrace();
+		        }
+		        catch (Exception ex)
+		        {
+		        	ex.printStackTrace();
+		        }
+	        }	       
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+    }
 }
