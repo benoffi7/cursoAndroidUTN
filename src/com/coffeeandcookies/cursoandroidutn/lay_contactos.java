@@ -112,7 +112,7 @@ public class lay_contactos extends Activity
 											try 
 											{
 												Uri result = data.getData();
-												Log.v(TAG,"Informacion de contacto: " + result.toString());
+												Log.v(TAG,"Informacion de contacto: " + result.toString());//scscac:adasd/2323/1
 												String id = result.getLastPathSegment();
 												
 												cursor = getContentResolver().query(Email.CONTENT_URI,null, Email.CONTACT_ID + "=?", new String[] { id },null);
@@ -127,6 +127,7 @@ public class lay_contactos extends Activity
 													Log.w(TAG, "No hay resultados");
 												}
 												
+												cursor.close();
 												 Cursor phones = getContentResolver().query(Phone.CONTENT_URI, null, Phone.CONTACT_ID + " = " + id, null, null);
 											     while (phones.moveToNext())
 											     {
