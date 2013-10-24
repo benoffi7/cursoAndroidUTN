@@ -1,14 +1,24 @@
 package com.coffeeandcookies.cursoandroidutn;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -78,8 +88,8 @@ public class lay_camara extends Activity
 		        	ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
 			        photo.compress(Bitmap.CompressFormat.JPEG, 70, baos); //bm is the bitmap object   
 			        imageView_result.setImageBitmap(photo);
-		            System.gc();
-			       
+			        guardarImagen(photo);
+		            System.gc();			       
 			        baos.close();
 			        baos=null;
 		        }
@@ -105,7 +115,8 @@ public class lay_camara extends Activity
 	       		 	System.gc();		  			            
 			        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			        photoBitMap.compress(Bitmap.CompressFormat.JPEG, 70, baos);	          
-			        imageView_result.setImageBitmap(photoBitMap);			       
+			        imageView_result.setImageBitmap(photoBitMap);	
+			        guardarImagen(photoBitMap);
 			        System.gc();	
 			        baos.close();
 			        baos=null;
@@ -126,4 +137,65 @@ public class lay_camara extends Activity
 			e.printStackTrace();
 		}
     }
+	
+	public void copyDatabaseToSdCard()
+	{
+		Log.e("Databasehealper", "********************************");
+		try 
+		{
+			File f1 = new File("data/data/com.coffeeandcookies.ushuaiamovil/databases/comercios_V5");
+			if (f1.exists()) 
+			{
+				File f2 = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+ "/comercios_V5.db");
+				f2.createNewFile();
+				InputStream in = new FileInputStream(f1);
+				OutputStream out = new FileOutputStream(f2);
+				byte[] buf = new byte[1024];
+				int len;
+				while ((len = in.read(buf)) > 0) {
+					out.write(buf, 0, len);
+				}
+				in.close();
+				out.close();
+			}
+		} 
+		catch (FileNotFoundException ex) 
+		{
+			System.out.println(ex.getMessage() + " in the specified directory.");
+			System.exit(0);
+			ex.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		Log.e("Databasehealper", "********************************");
+	}
+
+	private void guardarImagen(Bitmap photo)
+	{
+		 String root = Environment.getExternalStorageDirectory().toString();
+         File myDir = new File(root + "/saved_images");    
+         myDir.mkdirs();
+         Random generator = new Random();
+         int n = 10000;
+         n = generator.nextInt(n);
+         String fname = "Image-"+ n +".jpg";
+         File file = new File (myDir, fname);
+         if (file.exists ()) file.delete (); 
+         try 
+         {
+                FileOutputStream out = new FileOutputStream(file);
+                photo.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                out.flush();
+                out.close();
+
+         } 
+         catch (Exception e)
+         {
+                e.printStackTrace();
+         }		
+	}
 }
