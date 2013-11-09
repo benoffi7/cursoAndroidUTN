@@ -51,7 +51,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<Casa> implements Filterabl
 			protected FilterResults performFiltering(final CharSequence constraint) 
 			{			
 				ArrayList <Casa> addressList = null;
-				if ((constraint != null) && (constraint.length()>1))
+				if ((constraint != null) && (constraint.length()>3))
 				{
 					addressList = devolverCasas();
 				}
