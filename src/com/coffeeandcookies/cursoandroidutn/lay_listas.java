@@ -3,7 +3,6 @@ package com.coffeeandcookies.cursoandroidutn;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;

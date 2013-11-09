@@ -1,17 +1,15 @@
 package com.coffeeandcookies.cursoandroidutn;
 
-import com.coffeeandcookies.cursoandroidutn.daos.DAO_Usuarios;
-import com.coffeeandcookies.cursoandroidutn.objetos.Usuario;
-
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.coffeeandcookies.cursoandroidutn.daos.DAO_Usuarios;
+import com.coffeeandcookies.cursoandroidutn.objetos.Usuario;
 
 public class lay_login_correcto_db extends Activity
 {
