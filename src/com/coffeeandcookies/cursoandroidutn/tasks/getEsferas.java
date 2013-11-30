@@ -79,9 +79,9 @@ public class getEsferas extends AsyncTask<Void, Void, ArrayList<Esfera>>
  	 	    			Esfera oEsfera = new Esfera();
  	 	    			oEsfera.setId(esferaJSON.getInt("id"));
  	 	    			oEsfera.setNombre(esferaJSON.getString("nombre"));
- 	 	    			oEsfera.setNombre(esferaJSON.getString("nombre"));
- 	 	    			oEsfera.setNombre(esferaJSON.getString("latitud"));
- 	 	    			oEsfera.setNombre(esferaJSON.getString("longitud"));
+ 	 	    			oEsfera.setDescripcion(esferaJSON.getString("descripcion"));
+ 	 	    			oEsfera.setLatitud(esferaJSON.getString("latitud"));
+ 	 	    			oEsfera.setLongitud(esferaJSON.getString("longitud"));
  	 	    			esferas.add(oEsfera);
  	 	    		}
  	 	   		}
