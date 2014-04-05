@@ -33,7 +33,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.coffeeandcookies.cursoandroidutn.lay_internet"
+            android:name="com.coffeeandcookies.cursoandroidutn.lay_facebook"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,12 +43,17 @@
         </activity>
         <activity android:name="com.coffeeandcookies.cursoandroidutn.lay_login_correcto_db" >
         </activity>
+        <activity android:name="com.facebook.LoginActivity" />
 
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value=" AIzaSyBdP5FoClCnUCGoxmdZ6r6vOwa2eCjxmZw" />
-        
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

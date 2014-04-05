@@ -10,7 +10,6 @@
     <string name="text_moneda_destino">Monedas Destino</string>
     <string name="text_hint_edit">Ingrese un valor (OPCIONAL)</string>
     <string name="button_convertir">Convertir</string>
-    
     <string name="legend_user">Usuario</string>
     <string name="hint_user">Ingrese el usuario</string>
     <string name="hint_pass">Ingrese su password</string>
@@ -20,5 +19,7 @@
     <string name="button_borrar">Borrar</string>
     <string name="legend_edad">Edad</string>
     <string name="legend_mail">Mail</string>
+    <string name="app_id">558355197596925</string>
+    <string name="share">Share</string>
 
 </resources>
