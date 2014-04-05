@@ -101,7 +101,19 @@ public class lay_facebook extends Activity
 		Log.d("KeyHash:", ""+requestCode+" "+resultCode);
 		if (pendingPublishReauthorization)
 		{
-			publishStory();
+			Session session = Session.getActiveSession();
+			if (session != null)
+			{
+				List<String> permissions = session.getPermissions();
+				if (!isSubsetOf(PERMISSIONS, permissions))
+				{
+					//mostrar mensaje
+				}
+				else
+				{
+					publishStory();
+				}
+			}			
 		}
 	}
 
@@ -166,6 +178,9 @@ public class lay_facebook extends Activity
 			postParams.putString("link", "https://developers.facebook.com/android");
 			postParams.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
 
+			
+
+			
 			Request.Callback callback = new Request.Callback()
 			{
 				public void onCompleted(Response response)
@@ -183,17 +198,16 @@ public class lay_facebook extends Activity
 					FacebookRequestError error = response.getError();
 					if (error != null)
 					{
-						Toast.makeText(getApplicationContext(), error.getErrorMessage(), Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), postId, Toast.LENGTH_SHORT).show();
 					}
 					else
 					{
-						Toast.makeText(getApplicationContext(), postId, Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), error.getErrorMessage(), Toast.LENGTH_LONG).show();
 					}
 				}
 			};
 
 			Request request = new Request(session, "me/feed", postParams, HttpMethod.POST, callback);
-
 			RequestAsyncTask task = new RequestAsyncTask(request);
 			task.execute();
 		}
