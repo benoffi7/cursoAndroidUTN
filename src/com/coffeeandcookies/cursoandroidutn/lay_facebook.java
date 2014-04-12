@@ -79,10 +79,7 @@ public class lay_facebook extends Activity
 							if (user != null)
 							{
 								Log.d("KeyHash:", user.getName());
-								
-									shareButton.setVisibility(View.VISIBLE);
-								
-								
+								shareButton.setVisibility(View.VISIBLE);
 							}
 						}
 					});
@@ -98,7 +95,7 @@ public class lay_facebook extends Activity
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 		Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
-		Log.d("KeyHash:", ""+requestCode+" "+resultCode);
+		Log.d("KeyHash:", "" + requestCode + " " + resultCode);
 		if (pendingPublishReauthorization)
 		{
 			Session session = Session.getActiveSession();
@@ -107,13 +104,13 @@ public class lay_facebook extends Activity
 				List<String> permissions = session.getPermissions();
 				if (!isSubsetOf(PERMISSIONS, permissions))
 				{
-					//mostrar mensaje
+					// mostrar mensaje
 				}
 				else
 				{
 					publishStory();
 				}
-			}			
+			}
 		}
 	}
 
@@ -140,7 +137,6 @@ public class lay_facebook extends Activity
 	}
 
 	// posting
-
 
 	private boolean isSubsetOf(Collection<String> subset, Collection<String> superset)
 	{
@@ -178,9 +174,6 @@ public class lay_facebook extends Activity
 			postParams.putString("link", "https://developers.facebook.com/android");
 			postParams.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
 
-			
-
-			
 			Request.Callback callback = new Request.Callback()
 			{
 				public void onCompleted(Response response)
