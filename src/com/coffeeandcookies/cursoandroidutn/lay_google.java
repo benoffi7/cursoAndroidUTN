@@ -40,7 +40,6 @@ public class lay_google extends Activity
 		setContentView(R.layout.lay_google);
 		findViewById(R.id.sign_in_button).setOnClickListener(new OnClickListener()
 		{
-
 			@Override
 			public void onClick(View v)
 			{
@@ -52,7 +51,9 @@ public class lay_google extends Activity
 			}
 		});
 
-		mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks()
+		mGoogleApiClient = new GoogleApiClient.Builder(this)
+		
+		.addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks()
 		{
 
 			@Override
@@ -67,8 +68,7 @@ public class lay_google extends Activity
 					Image personPhoto = currentPerson.getImage();
 					String personGooglePlusProfile = currentPerson.getUrl();
 					String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-					Log.d("nulos",personName+personPhoto.getUrl()+personGooglePlusProfile+email);
-
+					Log.d("nulos",personName+personPhoto.getUrl()+personGooglePlusProfile+email+currentPerson.getId());
 				}
 			}
 
