@@ -1,6 +1,7 @@
 package com.coffeeandcookies.cursoandroidutn.lib;
 
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -10,25 +11,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 public class GPSTracker extends Service
 {
-
-	// flag for GPS status
 	boolean isGPSEnabled = false;
-
-	// flag for network status
 	boolean isNetworkEnabled = false;
+	Location location; 
+	double latitude; 
+	double longitude;
 
-	// flag for GPS status
-	boolean canGetLocation = false;
-
-	Location location; // location
-	double latitude; // latitude
-	double longitude; // longitude
-
-	// Declaring a Location Manager
 	protected LocationManager locationManager;
 
 	@Override
@@ -48,6 +39,13 @@ public class GPSTracker extends Service
 		new GetLocations().execute();
 		super.onCreate();
 	}
+	
+	@Override
+	public ComponentName startService(Intent service)
+	{
+		// TODO Auto-generated method stub
+		return super.startService(service);
+	}
 
 	public class GetLocations extends AsyncTask<Void, Void, Void>
 	{
@@ -55,12 +53,9 @@ public class GPSTracker extends Service
 		@Override
 		protected void onPreExecute()
 		{
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-			// getting GPS status
 			isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-			// getting network status
 			isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 			if (isNetworkEnabled)
 			{
