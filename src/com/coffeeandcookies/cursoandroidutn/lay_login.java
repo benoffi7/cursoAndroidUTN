@@ -1,8 +1,9 @@
-package com.coffeeandcookies.cursoandroidutn;
+package com.example.cursoandroidutnnivel1.login;
+
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,156 +12,183 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cursoandroidutnnivel1.R;
+
 public class lay_login extends Activity
 {
-	private EditText edit_user;
-	private EditText edit_pass;
-	private Button button_login;
-	
+	 EditText edit_user;
+	EditText edit_pass;
+	 Button button_login;
+
 	String TAG = "Ciclodevida";
-	//No la usamos más
-	//String password = "velez";
-	private SharedPreferences mSharedPreferences;	
+	String password = "velez";
+	
+	int cantidaddelogin = 3;
+	int aux = 0;
+	ArrayList<String> usuarios = new ArrayList<String>();
+	ArrayList<String> passwords= new ArrayList<String>();
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) 
+	protected void onCreate(Bundle savedInstanceState)
 	{
 		Log.d(TAG, "onCreate - lay_login");
-		setContentView(R.layout.lay_login);
-		levantarXML();		
-		asignarEventos();
 		super.onCreate(savedInstanceState);
-	}
+		setContentView(R.layout.lay_login);
+		levantarXML();
+		asignarEventos();
+		initData();
+		
+		String variable = edit_user.getText().toString();
+		boolean coincidencia = variable.equals("pepe");
+		int cantidad = variable.length();
+	}	
 	
 	@Override
-	protected void onResume() 
+	protected void onResume()
 	{
-		Log.d(TAG, "onResume - lay_login");
-		mSharedPreferences = getApplicationContext().getSharedPreferences(Configuracion.misprefs, 0);
-		levantarUser();
+		edit_user.setText("");
+		edit_pass.setText("");
 		super.onResume();
 	}
+	
+	private void initData()
+	{
+		usuarios.add("gonzalo");
+		usuarios.add("natalia");
+		usuarios.add("noelia");
+		usuarios.add("luciana");
+		usuarios.add("candela");
 		
-	private void levantarUser()
-	{
-		String nombreRecuperado = mSharedPreferences.getString(Configuracion.user, "");
-		edit_user.setText(nombreRecuperado);
-		edit_pass.setText("");
+		passwords.add("app01");
+		passwords.add("app02");
+		passwords.add("app03");
+		passwords.add("app04");
+		passwords.add("app05");
+		
+		String nombre = getResources().getString(R.string.app_name);
 	}
-	
-	private void guardarUser()
+
+	private void levantarXML()
 	{
-		SharedPreferences.Editor editor = mSharedPreferences.edit();
-		editor.putString(Configuracion.user, edit_user.getText().toString());
-		//el password lo tengo que guardar porque si es un usuario nuevo tengo que registrar ese password
-		editor.putString(Configuracion.pass, edit_pass.getText().toString());
-		editor.commit();
+		edit_user = (EditText) findViewById(R.id.edit_user);
+		edit_pass = (EditText) findViewById(R.id.edit_pass);
+		button_login = (Button) findViewById(R.id.button_login);
 	}
-	
-	private void asignarEventos() 
+
+	private void asignarEventos()
 	{
-		button_login.setOnClickListener(new OnClickListener() 
-		{			
+//		int x= 5;
+//		for (;x<usuarios.size();x++)
+//		{
+//			
+//		}
+		
+		button_login.setOnClickListener(new View.OnClickListener()
+		{
 			@Override
-			public void onClick(View v) 
+			public void onClick(View v)
 			{
 				String validacion = validarDatos();
-				if (validacion.length()==0)
+				//validacion = validarUsuarios();
+				if (validacion.length() == 0)
 				{
-					guardarUser();
-					Toast.makeText(getApplicationContext(), "Validacion OK", Toast.LENGTH_LONG).show();
-					Intent intento = new Intent(lay_login.this,lay_login_correcto.class);
-					//Ya no tiene sentido porque el nombre lo estoy guardando en las prefs
-//					intento.putExtra(Configuracion.user, edit_user.getText().toString());
+					Toast.makeText(getApplicationContext(), "Validacion OK", Toast.LENGTH_SHORT).show();
+					Intent intento = new Intent(lay_login.this, lay_login_correcto.class);
+					intento.putExtra("pos", edit_user.getText().toString());
 					startActivity(intento);
 				}
-				else
+				else //sino
 				{
 					Toast.makeText(getApplicationContext(), validacion, Toast.LENGTH_LONG).show();
+					aux = aux + 1;
+					if (aux == cantidaddelogin )
+					{
+						finish();
+					}
 				}
 			}
 		});
 	}
-	
+
+	protected String validarUsuarios()
+	{
+		
+		for (int i = 0;i<usuarios.size();i++)
+		{
+			if (usuarios.get(i).equals(edit_user.getText().toString()))
+			{
+				String password = passwords.get(i);
+				if (!password.equals(edit_pass.getText().toString()))
+				{
+					return "Clave incorrecta"; 
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
+		return "No se encontro el usuario ";
+	}
+
 	private String validarDatos()
 	{
-		if (edit_pass.getText().toString().length()==0)
+		if (edit_pass.getText().toString().length() == 0)
 		{
 			return "Pass vacio";
 		}
-		if (edit_user.getText().toString().length()==0)
+		if (edit_user.getText().toString().length() == 0)
 		{
 			return "User vacio";
 		}
-		//tenemos que revisar varias cosas, si el password recuperado es vacio, se trata de un nuevo usuario
-		//por lo cual no podemos validar contra algo. 
-		
-		//si tenemos password recuperado entonces si lo comparamos con lo ingresado por el usuario
-		String pass = mSharedPreferences.getString(Configuracion.pass, "");
-		if (pass.length()>0)
+		if (!edit_pass.getText().toString().equals(password))
 		{
-			if (!edit_pass.getText().toString().equals(pass))
-			{
-				return "Contraseña incorrecta";
-			}
-		}		
-		return "";		
+			return "ContraseÃ±a incorrecta";
+		}
+		return "";
 	}
 
-	private void levantarXML() 
-	{
-		edit_user = (EditText)findViewById(R.id.edit_user);
-		edit_pass = (EditText)findViewById(R.id.edit_pass);
-		button_login = (Button)findViewById(R.id.button_login);
-	}
 	
+
 	@Override
-	protected void onPause() 
+	protected void onPause()
 	{
 		Log.d(TAG, "onPause - lay_login");
-		guardarUser();
 		super.onPause();
 	}
 
-	
-	
 	@Override
-	protected void onDestroy() 
+	protected void onDestroy()
 	{
 		Log.d(TAG, "onDestroy - lay_login");
 		super.onDestroy();
 	}
+
 	
+
 	@Override
-	protected void onStart() 
-	{
-		Log.d(TAG, "onStart - lay_login");
-		super.onStart();
-	}
-	
-	@Override
-	protected void onRestart() 
+	protected void onRestart()
 	{
 		Log.d(TAG, "onRestart - lay_login");
 		super.onRestart();
 	}
-	
+
 	@Override
-	protected void onStop() 
+	protected void onStop()
 	{
 		Log.d(TAG, "onStop - lay_login");
 		super.onStop();
 	}
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState)
 	{
 		Log.d(TAG, "onSaveInstanceState - lay_login");
 		super.onSaveInstanceState(outState);
 	}
-	
+
 	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) 
+	protected void onRestoreInstanceState(Bundle savedInstanceState)
 	{
 		Log.d(TAG, "onRestoreInstanceState - lay_login");
 		super.onRestoreInstanceState(savedInstanceState);
